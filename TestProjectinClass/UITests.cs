@@ -454,10 +454,10 @@ namespace TestProjectinClass
             Assert.AreEqual(expected: "Please choose a location from the suggested addresses. This field doesn’t accept custom addresses, or “#” symbols.", actualResultat);
         }
 
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    _webDriver.Dispose();
-        //}
+        [TearDown]
+        public void TearDown()
+        {
+            _webDriver.Dispose();
+        }
     }
 }
