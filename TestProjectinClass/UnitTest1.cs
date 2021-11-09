@@ -211,7 +211,7 @@ namespace TestProjectinClass
         [TearDown]
         public void After()
         {
-            //driver.Quit();
+            driver.Dispose();
         }
     }
 }
