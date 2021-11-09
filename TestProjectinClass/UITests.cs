@@ -23,7 +23,56 @@ namespace TestProjectinClass
         }
 
         [Test]
-        public void Test()
+        public void LoginWithEmptyEmail()
+        {
+            var signInPage = new SignUp(_webDriver);
+            signInPage.GoToSignInPage()
+                .ImputEmailField("")
+                .ImputPasswordField(HelpForTests.PasswordLogIn())
+                .LogInButtonClick();
+            var actualResultMessage = signInPage.GetErrorMessageAboutEmail();
+            Assert.AreEqual(expected: "Required", actualResultMessage);
+        }
+
+        [TestCase("")]
+        public void LoginWithEmptyPassword()
+        {
+            var signInPage = new SignUp(_webDriver);
+            signInPage.GoToSignInPage()
+                .ImputEmailField(HelpForTests.EmailLogIn())
+                .ImputPasswordField("")
+                .LogInButtonClick();
+            var actualResultMessage = signInPage.GetErrorMessageAboutPassword();
+            Assert.AreEqual(expected: "Required", actualResultMessage);
+        }
+
+        [TestCase("", "")]
+        public void LoginWithEmptyPasswordAndEmail(string email, string password)
+        {
+            var signInPage = new SignUp(_webDriver);
+            signInPage.GoToSignInPage()
+                .ImputEmailField(email)
+                .ImputPasswordField(password)
+                .LogInButtonClick();
+            var actualResultMessage = signInPage.GetErrorMessageAboutPassword() + signInPage.GetErrorMessageAboutEmail();
+            Assert.AreEqual(expected: "RequiredRequired", actualResultMessage);
+        }
+
+        [Test]
+        public void LoginWithValidLogginAndPass()
+        {
+            var signInPage = new SignUp(_webDriver);
+            var home = new GreetingHomePage(_webDriver);
+            signInPage.GoToSignInPage()
+                .ImputEmailField(HelpForTests.EmailLogIn())
+                .ImputPasswordField(HelpForTests.PasswordLogIn())
+                .LogInButtonClick();
+            var actualResultMessage = home.CheckATryLogIn;
+            Assert.AreEqual(expected: "Welcome back Naruto! How can we help?", actualResultMessage);
+        }
+
+        [Test]
+        public void ErrorSubmitTest()
         {
             var signInPage = new SignUp(_webDriver);
             signInPage.GoToSignInPage()
@@ -220,14 +269,13 @@ namespace TestProjectinClass
             Assert.AreEqual(expected: "Required", actualResultat);
         }
 
-        [TestCase("")]
-        public void RegistrationWithEmptyLastName(string lastName)
+        public void RegistrationWithEmptyLastName()
         {
             var registrationPage = new Registration(_webDriver);
             var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputLastName(HelpForTests.FirstName())
-                .InputLastName(lastName)
+                .InputLastName("")
                 .InputEmail(HelpForTests.EmailUser())
                 .InputPassword(HelpForTests.RegistrationPassword())
                 .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())

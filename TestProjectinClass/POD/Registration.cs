@@ -174,7 +174,5 @@ namespace TestProjectinClass.POD
         public string errorTextAboutAddress() => _webDriver.FindElement(_errorMessageByAddress).Text;
 
         public string errorTextAboutIndustry() => _webDriver.FindElement(_errorMessageByIndustry).Text;
-
-        public string errorTextAboutOtherIndustry() => _webDriver.FindElement(_errorMessageByIndustryOther).Text;
     }
 }

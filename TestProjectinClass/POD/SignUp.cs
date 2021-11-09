@@ -16,6 +16,8 @@ namespace TestProjectinClass.POD
         private readonly By _loginButton = By.CssSelector("button[class^=SignInForm__submitButton]");
         private readonly By _errorMessage = By.XPath("//*[contains(@class, 'SignInForm__submitButton')]/../../" +
             "div[contains(@class, 'PageFormLayout__errors--3dFcq')]/div/div");
+        private readonly By _errorMessageByEmail = By.XPath("//input[@name = 'email']/../div[@class='FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByPassword = By.XPath("//input[@name = 'password']/../div[@class='FormErrorText__error---nzyq']/div");
 
         public SignUp(IWebDriver webDriver)
         {
@@ -44,7 +46,14 @@ namespace TestProjectinClass.POD
             _webDriver.FindElement(_loginButton).Click(); //красиво записали
 
         public string GetErrorMessage() =>
-            _webDriver.FindElement(_errorMessage).Text; 
+            _webDriver.FindElement(_errorMessage).Text;
+
+        public string GetErrorMessageAboutEmail() =>
+            _webDriver.FindElement(_errorMessageByEmail).Text;
+
+        public string GetErrorMessageAboutPassword() =>
+            _webDriver.FindElement(_errorMessageByPassword).Text;
 
     }
 }
+

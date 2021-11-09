@@ -63,5 +63,17 @@ namespace TestProjectinClass.POD
             string companySite = "11031 Mississippi Ave, Los Angeles, CA 90025, USA";
             return companySite;
         }
+
+        public static string EmailLogIn()
+        {
+            string emailLogIn = "narutoSasuke02112021203621@gmail.com";
+            return emailLogIn;
+        }
+
+        public static string PasswordLogIn()
+        {
+            string passwordLogIn = "Naruto_2345n";
+            return passwordLogIn;
+        }
     }
 }
