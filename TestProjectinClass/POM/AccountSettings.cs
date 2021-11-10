@@ -28,7 +28,10 @@ namespace TestProjectinClass.POM
 
         private readonly By _primaryAccountHolderName = By.XPath("/html/body/nb-app/ng-component/nb-internal-layout/" +
             "common-layout/section/div/ng-component/nb-account-info-edit/common-border" +
-            "/div[1]/div/nb-account-info-general-information/form/div[2]/div/nb-paragraph[2]/div");
+            "/div[1]/div/nb-account-info-general-information/form/div[2]/div/nb-paragraph[2]/div"); //By.CssSelector("[@class=\'paragraph_type_gray\'][2]");
+        //private readonly By _companyLocation = By.XPath("/html/body/nb-app/ng-component/nb-internal-layout/common-layout/" +
+        //    "section/div/ng-component/nb-account-info-edit/common-border" +
+        //    "/div[1]/div/nb-account-info-general-information/form/div[2]/div/nb-paragraph[3]/div");
 
         private readonly By _greetingHomePage = By.CssSelector("[class='HeaderLine__logo--104lH ']");
 
@@ -112,5 +115,7 @@ namespace TestProjectinClass.POM
         }
 
         public string GetPrimaryAccountName() => _webDriver.FindElement(_primaryAccountHolderName).Text;
+
+        //public string CompanyLocation() => _webDriver.FindElement(_companyLocation).Text;
     }
 }

@@ -77,8 +77,19 @@ namespace TestProjectinClass.POM
         }
 
         public static string UniqueStringGeneration()
-        { 
-            return DateTime.Now.ToString("ddMM" + "Lily" + "Potter");
+        {
+            string now = DateTime.Now.ToString("ddhhmm");
+            string lastName = now + "Potter";
+            return lastName;
+            //return DateTime.Now.ToString("ddMM"+"Harry");
+        }
+
+        public static string UniqueStringGenerationName()
+        {
+            string now = DateTime.Now.ToString("mmss");
+            string firstName = "Harry" + now;
+            return firstName;
+            //return DateTime.Now.ToString("ddMM"+"Harry");
         }
     }
 }
