@@ -72,7 +72,7 @@ namespace TestProjectinClass
         }
 
         [Test]
-        public void ErrorSubmitTest()
+        public void ErrorLogInTest() // в классе делали
         {
             var signInPage = new SignUp(_webDriver);
             signInPage.GoToSignInPage()
