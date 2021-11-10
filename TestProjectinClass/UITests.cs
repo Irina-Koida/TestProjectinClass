@@ -313,7 +313,6 @@ namespace TestProjectinClass
                .InputLastName(HelpForTests.LastName())
                .InputEmail(HelpForTests.EmailUser())
                .InputPassword("")
-               .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                .InputPhoneNumber(HelpForTests.PhoneNumber())
                .ClickNextButton();
             var actualResultat = registrationPage.errorTextAboutPassword();
