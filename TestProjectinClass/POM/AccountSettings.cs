@@ -43,9 +43,9 @@ namespace TestProjectinClass.POM
         public void ClickAccountButton() =>
             _webDriver.FindElement(_accountButton).Click();
 
-        public AccountSettings ImputPasswordType(string password)
+        public AccountSettings ImputPasswordType()
         {
-            _webDriver.FindElement(_passwordType).SendKeys(password);
+            _webDriver.FindElement(_passwordType).SendKeys("HarryPotter - thedeath2");
             return this;
         }
 
@@ -76,12 +76,14 @@ namespace TestProjectinClass.POM
 
         public AccountSettings EditGeneralInfoIndustry(string industry)
         {
+            _webDriver.FindElement(_editGeneralInfoIndustry).Clear();
             _webDriver.FindElement(_editGeneralInfoIndustry).SendKeys(industry);
             return this;
         }
 
         public AccountSettings EditGeneralInfoCompanyAddress(string address)
         {
+            _webDriver.FindElement(_editGeneralInfoLocation).Clear();
             _webDriver.FindElement(_editGeneralInfoLocation).SendKeys(address);
             Thread.Sleep(1500);
             _webDriver.FindElement(_editGeneralInfoLocation).SendKeys(Keys.ArrowDown);
@@ -102,9 +104,11 @@ namespace TestProjectinClass.POM
             return this;
         }
 
-        public AccountSettings EditGeneralInfoPhone()
+        public AccountSettings EditGeneralInfoPhone(string phone)
         {
             _webDriver.FindElement(_editGeneralInfoPhone).Click();
+            _webDriver.FindElement(_editGeneralInfoPhone).Clear();
+            _webDriver.FindElement(_editGeneralInfoPhone).SendKeys(phone);
             return this;
         }
 
