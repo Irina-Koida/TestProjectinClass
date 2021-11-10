@@ -23,6 +23,25 @@ namespace TestProjectinClass
         }
 
         [Test]
+        public void EditGeneralInfoIndustryValid()
+        {
+            var accountSetting = new AccountSettings(_webDriver);
+            var signInPage = new SignUp(_webDriver);
+            var homePage = new GreetingHomePage(_webDriver);
+            signInPage.GoToSignInPage()
+               .ImputEmailField(HelpForTests.EmailLogIn())
+               .ImputPasswordField(HelpForTests.PasswordLogIn())
+               .LogInButtonClick();
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoIndustry("Photo");
+            accountSetting.SaveGeneralInfoEdition();
+
+            string actualResult = "Photo";
+            Assert.AreEqual(expected: "Photo", actualResult);
+        }
+
+        [Test]
         public void EditGeneralInfoFirstNameValid()
         {
             var accountSetting = new AccountSettings(_webDriver);
@@ -79,8 +98,8 @@ namespace TestProjectinClass
             Assert.IsTrue(accountSetting.GetPrimaryAccountName().Contains(lastName));
         }
 
-        [TestCase("Pensilvânia, USA")]
-        public void EditGeneralInfoCompanyAddressValid(string address)
+        [Test]
+        public void EditGeneralInfoCompanyAddressValid()
         {
             var accountSetting = new AccountSettings(_webDriver);
             var signInPage = new SignUp(_webDriver);
@@ -91,10 +110,10 @@ namespace TestProjectinClass
                .LogInButtonClick();
             accountSetting.ClickAccountButton();
             accountSetting.EditGeneralInfo();
-            accountSetting.EditGeneralInfoCompanyAddress(address);
+            accountSetting.EditGeneralInfoCompanyAddress("Salem, MA, USA");
             accountSetting.SaveGeneralInfoEdition();
-
-            Assert.AreEqual(expected: address, actual: address);
+            string actualResult = "Salem, MA, USA";
+            Assert.AreEqual(expected: "Salem, MA, USA", actualResult);
         }
 
         [Test]
