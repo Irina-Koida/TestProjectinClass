@@ -75,5 +75,10 @@ namespace TestProjectinClass.POM
             string passwordLogIn = "HarryPotter-thedeath2";
             return passwordLogIn;
         }
+
+        public static string UniqueStringGeneration()
+        { 
+            return DateTime.Now.ToString("ddMM" + "Lily" + "Potter");
+        }
     }
 }

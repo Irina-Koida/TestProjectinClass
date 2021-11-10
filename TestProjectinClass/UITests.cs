@@ -23,6 +23,98 @@ namespace TestProjectinClass
         }
 
         [Test]
+        public void EditGeneralInfoFirstNameValid()
+        {
+            var accountSetting = new AccountSettings(_webDriver);
+            var signInPage = new SignUp(_webDriver);
+            var homePage = new GreetingHomePage(_webDriver);
+            signInPage.GoToSignInPage()
+               .ImputEmailField(HelpForTests.EmailLogIn())
+               .ImputPasswordField(HelpForTests.PasswordLogIn())
+               .LogInButtonClick();
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoFirstName("Lily");
+            accountSetting.SaveGeneralInfoEdition();
+            accountSetting.GoToGreetingHomeHage();
+            var homePage2 = new GreetingHomePage(_webDriver);
+            string actualResult = homePage2.CheckATryLogIn;
+            Assert.AreEqual(expected: "Welcome back Lily! How can we help?", actual: actualResult);
+        }
+
+        [Test]
+        public void EditGeneralInfoFirstNameRandomValid()
+        {
+            var accountSetting = new AccountSettings(_webDriver);
+            var signInPage = new SignUp(_webDriver);
+            var homePage = new GreetingHomePage(_webDriver);
+            string firstName = HelpForTests.UniqueStringGeneration();
+            signInPage.GoToSignInPage()
+               .ImputEmailField(HelpForTests.EmailLogIn())
+               .ImputPasswordField(HelpForTests.PasswordLogIn())
+               .LogInButtonClick();
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoFirstName(firstName);
+            accountSetting.SaveGeneralInfoEdition();
+            Assert.IsTrue(accountSetting.GetPrimaryAccountName().Contains(firstName));
+        }
+
+        [Test]
+        public void EditGeneralInfoLastNameValid()
+        {
+            var accountSetting = new AccountSettings(_webDriver);
+            var signInPage = new SignUp(_webDriver);
+            var homePage = new GreetingHomePage(_webDriver);
+            string lastName = HelpForTests.UniqueStringGeneration();
+            signInPage.GoToSignInPage()
+               .ImputEmailField(HelpForTests.EmailLogIn())
+               .ImputPasswordField(HelpForTests.PasswordLogIn())
+               .LogInButtonClick();
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoLastName(lastName);
+            accountSetting.SaveGeneralInfoEdition();
+            Assert.IsTrue(accountSetting.GetPrimaryAccountName().Contains(lastName));
+        }
+
+        [Test]
+        public void EditGeneralInfoCompanyAddressValid()
+        {
+            var accountSetting = new AccountSettings(_webDriver);
+            var signInPage = new SignUp(_webDriver);
+            var homePage = new GreetingHomePage(_webDriver);
+            signInPage.GoToSignInPage()
+               .ImputEmailField(HelpForTests.EmailLogIn())
+               .ImputPasswordField(HelpForTests.PasswordLogIn())
+               .LogInButtonClick();
+            string oldAddress = "Salem, MA, USA";
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoCompanyAddress("Pennsylvania Station, 4 Pennsylvania Plaza, New York, NY 10001, USA");
+            accountSetting.SaveGeneralInfoEdition();
+            string newAddress = "Pennsylvania Station, 4 Pennsylvania Plaza, New York, NY 10001, USA";
+            accountSetting.SaveGeneralInfoEdition();
+            Assert.IsFalse(oldAddress == newAddress);
+        }
+
+
+        [Test]
+        public void LogOutAccount()
+        {
+            var logOutPage = new LogAut(_webDriver);
+            var signIn = new SignIn(_webDriver);
+            logOutPage.GoToHomePage()
+                .ImputEmailField(HelpForTests.EmailLogIn())
+                .ImputPasswordField(HelpForTests.PasswordLogIn())
+                .LogInButtonClick();
+            logOutPage.ClickAccountButton();
+            logOutPage.ClickLogAutButton();
+
+            Assert.AreEqual(expected: signIn.GoToSignInPage() , signIn.GoToSignInPage());
+        }
+
+        [Test]
         public void LoginWithEmptyEmail()
         {
             var signInPage = new SignUp(_webDriver);
@@ -88,7 +180,7 @@ namespace TestProjectinClass
         public void RegistrationWitfValidData()
         {
             var registrationPage = new Registration(_webDriver);
-            var home = new GreetingHomePage(_webDriver);
+            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputFirstName(HelpForTests.FirstName())
                 .InputLastName(HelpForTests.LastName())
@@ -104,7 +196,7 @@ namespace TestProjectinClass
                 .InputCompanyIndustry(5)
                 .ClickOnFinishRegistration();
 
-            Assert.AreEqual(expected: $"Welcome {HelpForTests.FirstName()}! How can we help?", home.CheckATryLogIn);
+            Assert.AreEqual(expected: $"Welcome {HelpForTests.FirstName()}! How can we help?", homePage.CheckATryLogIn);
         }
 
         public void RegistrationWithInValidEmail()
@@ -429,8 +521,8 @@ namespace TestProjectinClass
         }
 
 
-        [TestCase( 2)]
-        public void RegistrationWitfInValidAddress( int count)
+        [TestCase(2)]
+        public void RegistrationWitfInValidAddress(int count)
         {
             var registrationPage = new Registration(_webDriver);
             var homePage = new GreetingHomePage(_webDriver);
@@ -453,10 +545,10 @@ namespace TestProjectinClass
             Assert.AreEqual(expected: "Please choose a location from the suggested addresses. This field doesn’t accept custom addresses, or “#” symbols.", actualResultat);
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            _webDriver.Dispose();
-        }
+        //[TearDown]
+        //public void TearDown()
+        //{
+        //    _webDriver.Dispose();
+        //}
     }
 }
