@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestProjectinClass.POD
+namespace TestProjectinClass.POM
 {
     static public class HelpForTests
     {
