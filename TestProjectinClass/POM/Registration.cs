@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace TestProjectinClass.POD
+namespace TestProjectinClass.POM
 {
     class Registration
     {
@@ -26,18 +26,26 @@ namespace TestProjectinClass.POD
         private readonly By _industry = By.CssSelector("[name='industry']");
         private readonly By _buttonFinish = By.CssSelector("[type='submit']");
 
-        private readonly By _errorMessageByFirstName = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='first_name']/../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByLastName = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='last_name']/../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByEmail = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='email']/../div[@class = 'FormErrorText__error---nzyq']/div");
-        private readonly By _errorMessageByPassword = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='password']/../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByConfirmPassword = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='password_confirm']/../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByPhone = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='phone_number']/../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByCompanyName = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='company_name']/../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByCompanyWebSite = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='company_website']/../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByAddress = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='location']/../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByIndustry = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='industry']/../../div[@class = 'FormErrorText__error---nzyq']");
-        private readonly By _errorMessageByIndustryOther = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='industry_other']/../div[@class = 'FormErrorText__error---nzyq']");
-
+        private readonly By _errorMessageByFirstName = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='first_name']" +
+            "/../div[@class = 'FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByLastName = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='last_name']/.." +
+            "/div[@class = 'FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByEmail = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='email']/.." +
+            "/div[@class = 'FormErrorText__error---nzyq']/div");
+        private readonly By _errorMessageByPassword = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='password']/.." +
+            "/div[@class = 'FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByConfirmPassword = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='password_confirm']/.." +
+            "/div[@class = 'FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByPhone = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='phone_number']/.." +
+            "/div[@class = 'FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByCompanyName = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='company_name']/.." +
+            "/div[@class = 'FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByCompanyWebSite = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='company_website']/.." +
+            "/div[@class = 'FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByAddress = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='location']/.." +
+            "/div[@class = 'FormErrorText__error---nzyq']");
+        private readonly By _errorMessageByIndustry = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='industry']/../.." +
+            "/div[@class = 'FormErrorText__error---nzyq']");
         private readonly By _errorMessageByPasswordLenght = By.XPath(".//*[text()='From 8 to 25 characters']/..");
         private readonly By _errorMessageByPasswordNumbers = By.XPath(".//*[text()='At least one number']/..");
         private readonly By _errorMessageByPasswordUpperCaseLenght = By.XPath(".//*[text()='At least one capital letter']/..");
@@ -143,36 +151,36 @@ namespace TestProjectinClass.POD
 
         public void ClickOnFinishRegistration() => _webDriver.FindElement(_buttonFinish).Click();
 
-        public string errorTextAboutFirstName() => _webDriver.FindElement(_errorMessageByFirstName).Text;
+        public string ErrorTextAboutFirstName() => _webDriver.FindElement(_errorMessageByFirstName).Text;
 
-        public string errorTextAboutLastName() => _webDriver.FindElement(_errorMessageByLastName).Text;
+        public string ErrorTextAboutLastName() => _webDriver.FindElement(_errorMessageByLastName).Text;
 
-        public string errorTextAboutEmail() => _webDriver.FindElement(_errorMessageByEmail).Text;
+        public string ErrorTextAboutEmail() => _webDriver.FindElement(_errorMessageByEmail).Text;
 
-        public string errorTextAboutPassword() => _webDriver.FindElement(_errorMessageByPassword).Text;
+        public string ErrorTextAboutPassword() => _webDriver.FindElement(_errorMessageByPassword).Text;
 
-        public string errorTextAboutPasswordLenght() => _webDriver.FindElement(_errorMessageByPasswordLenght).Text;
+        public string ErrorTextAboutPasswordLenght() => _webDriver.FindElement(_errorMessageByPasswordLenght).Text;
 
-        public string errorTextAboutPasswordNumbers() => _webDriver.FindElement(_errorMessageByPasswordNumbers).Text;
+        public string ErrorTextAboutPasswordNumbers() => _webDriver.FindElement(_errorMessageByPasswordNumbers).Text;
 
-        public string errorTextAboutPasswordUpperCase() => _webDriver.FindElement(_errorMessageByPasswordUpperCaseLenght).Text;
+        public string ErrorTextAboutPasswordUpperCase() => _webDriver.FindElement(_errorMessageByPasswordUpperCaseLenght).Text;
 
-        public string errorTextAboutPasswordLowerCase() => _webDriver.FindElement(_errorMessageByPasswordLowCaseLetter).Text;
+        public string ErrorTextAboutPasswordLowerCase() => _webDriver.FindElement(_errorMessageByPasswordLowCaseLetter).Text;
 
-        public string errorTextAboutPasswordMatch() => _webDriver.FindElement(_errorMessageByPasswordPasswordMath).Text;
+        public string ErrorTextAboutPasswordMatch() => _webDriver.FindElement(_errorMessageByPasswordPasswordMath).Text;
 
-        public string errorTextAboutPasswordMarks() => _webDriver.FindElement(_errorMessageByPasswordMarks).Text;
+        public string ErrorTextAboutPasswordMarks() => _webDriver.FindElement(_errorMessageByPasswordMarks).Text;
 
-        public string errorTextAboutConfitmPassword() => _webDriver.FindElement(_errorMessageByConfirmPassword).Text;
+        public string ErrorTextAboutConfitmPassword() => _webDriver.FindElement(_errorMessageByConfirmPassword).Text;
 
-        public string errorTextAboutPhone() => _webDriver.FindElement(_errorMessageByPhone).Text;
+        public string ErrorTextAboutPhone() => _webDriver.FindElement(_errorMessageByPhone).Text;
 
-        public string errorTextAboutCompanyName() => _webDriver.FindElement(_errorMessageByCompanyName).Text;
+        public string ErrorTextAboutCompanyName() => _webDriver.FindElement(_errorMessageByCompanyName).Text;
 
-        public string errorTextAboutCompanyWebSite() => _webDriver.FindElement(_errorMessageByCompanyWebSite).Text;
+        public string ErrorTextAboutCompanyWebSite() => _webDriver.FindElement(_errorMessageByCompanyWebSite).Text;
 
-        public string errorTextAboutAddress() => _webDriver.FindElement(_errorMessageByAddress).Text;
+        public string ErrorTextAboutAddress() => _webDriver.FindElement(_errorMessageByAddress).Text;
 
-        public string errorTextAboutIndustry() => _webDriver.FindElement(_errorMessageByIndustry).Text;
+        public string ErrorTextAboutIndustry() => _webDriver.FindElement(_errorMessageByIndustry).Text;
     }
 }

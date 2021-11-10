@@ -3,7 +3,7 @@ using OpenQA.Selenium.Chrome;
 using System;
 using System.Threading;
 using System.Linq;
-using TestProjectinClass.POD;
+using TestProjectinClass.POM;
 using NUnit.Framework;
 
 namespace TestProjectinClass
@@ -119,7 +119,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutEmail();
+            var actualResultat = registrationPage.ErrorTextAboutEmail();
 
             Assert.AreEqual(expected: "Invalid Email", actualResultat);
         }
@@ -137,7 +137,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(confirmPassword)
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutPassword() + " " + registrationPage.errorTextAboutPasswordUpperCase();
+            var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordUpperCase();
 
             Assert.AreEqual(expected: "Invalid password format At least one capital letter", actualResultat);
         }
@@ -155,7 +155,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(confirmPassword)
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutPassword() + " " + registrationPage.errorTextAboutPasswordLowerCase();
+            var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordLowerCase();
 
             Assert.AreEqual(expected: "Invalid password format At least one lowercase letter", actualResultat);
         }
@@ -174,7 +174,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(confirmPassword)
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutPassword() + " " + registrationPage.errorTextAboutPasswordLenght();
+            var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordLenght();
 
             Assert.AreEqual(expected: "Invalid password format From 8 to 25 characters", actualResultat);
         }
@@ -192,7 +192,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(confirmPassword)
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutPassword() + " " + registrationPage.errorTextAboutPasswordMarks();
+            var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordMarks();
 
             Assert.AreEqual(expected: "Invalid password format At least one special character such as an exclamation mark", actualResultat);
         }
@@ -210,7 +210,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(confirmPassword)
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton(); ;
-            var actualResultat = registrationPage.errorTextAboutPassword() + " " + registrationPage.errorTextAboutPasswordNumbers();
+            var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordNumbers();
 
             Assert.AreEqual(expected: "Invalid password format At least one number", actualResultat);
         }
@@ -228,7 +228,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(confirmPassword)
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutPasswordMatch();
+            var actualResultat = registrationPage.ErrorTextAboutPasswordMatch();
 
             Assert.AreEqual(expected: "Passwords match", actualResultat);
         }
@@ -246,7 +246,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                 .InputPhoneNumber(phone)
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutPhone();
+            var actualResultat = registrationPage.ErrorTextAboutPhone();
 
             Assert.AreEqual(expected: "Invalid phone format", actualResultat);
         }
@@ -264,7 +264,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutFirstName();
+            var actualResultat = registrationPage.ErrorTextAboutFirstName();
 
             Assert.AreEqual(expected: "Required", actualResultat);
         }
@@ -281,7 +281,7 @@ namespace TestProjectinClass
                 .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutLastName();
+            var actualResultat = registrationPage.ErrorTextAboutLastName();
 
             Assert.AreEqual(expected: "Required", actualResultat);
         }
@@ -298,7 +298,7 @@ namespace TestProjectinClass
                .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                .InputPhoneNumber(HelpForTests.PhoneNumber())
                .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutEmail();
+            var actualResultat = registrationPage.ErrorTextAboutEmail();
 
             Assert.AreEqual(expected: "Required", actualResultat);
         }
@@ -315,7 +315,7 @@ namespace TestProjectinClass
                .InputPassword("")
                .InputPhoneNumber(HelpForTests.PhoneNumber())
                .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutPassword();
+            var actualResultat = registrationPage.ErrorTextAboutPassword();
 
             Assert.AreEqual(expected: "Invalid password format", actualResultat);
         }
@@ -333,7 +333,7 @@ namespace TestProjectinClass
                .InputConfirmPassword("")
                .InputPhoneNumber(HelpForTests.PhoneNumber())
                .ClickNextButton(); ;
-            var actualResultat = registrationPage.errorTextAboutConfitmPassword();
+            var actualResultat = registrationPage.ErrorTextAboutConfitmPassword();
 
             Assert.AreEqual(expected: "Passwords must match", actualResultat);
         }
@@ -351,7 +351,7 @@ namespace TestProjectinClass
                .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                .InputPhoneNumber(phone)
                .ClickNextButton();
-            var actualResultat = registrationPage.errorTextAboutPhone();
+            var actualResultat = registrationPage.ErrorTextAboutPhone();
 
             Assert.AreEqual(expected: "Invalid phone format", actualResultat);
         }
@@ -375,7 +375,7 @@ namespace TestProjectinClass
             .InputCompanyAddress(HelpForTests.CompanyAddress())
             .InputCompanyIndustry(count)
             .ClickOnFinishRegistration();
-            var actualResultat = registrationPage.errorTextAboutCompanyName();
+            var actualResultat = registrationPage.ErrorTextAboutCompanyName();
 
             Assert.AreEqual(expected: "Required", actualResultat);
         }
@@ -399,7 +399,7 @@ namespace TestProjectinClass
             .InputCompanyAddress(HelpForTests.CompanyAddress())
             .InputCompanyIndustry(count)
             .ClickOnFinishRegistration();
-            var actualResultat = registrationPage.errorTextAboutCompanyWebSite();
+            var actualResultat = registrationPage.ErrorTextAboutCompanyWebSite();
 
             Assert.AreEqual(expected: "Required", actualResultat);
         }
@@ -423,7 +423,7 @@ namespace TestProjectinClass
            .InputCompanyAddress("")
            .InputCompanyIndustry(count)
            .ClickOnFinishRegistration();
-            var actualResultat = registrationPage.errorTextAboutAddress();
+            var actualResultat = registrationPage.ErrorTextAboutAddress();
 
             Assert.AreEqual(expected: "Please choose a location from the suggested addresses. This field doesn’t accept custom addresses, or “#” symbols.", actualResultat);
         }
@@ -448,7 +448,7 @@ namespace TestProjectinClass
            .InputCompanyAddress("57675 tyfdj ## jdfjviiefjddh")
            .InputCompanyIndustry(count)
            .ClickOnFinishRegistration();
-            var actualResultat = registrationPage.errorTextAboutAddress();
+            var actualResultat = registrationPage.ErrorTextAboutAddress();
 
             Assert.AreEqual(expected: "Please choose a location from the suggested addresses. This field doesn’t accept custom addresses, or “#” symbols.", actualResultat);
         }
