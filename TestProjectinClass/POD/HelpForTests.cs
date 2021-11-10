@@ -66,13 +66,13 @@ namespace TestProjectinClass.POD
 
         public static string EmailLogIn()
         {
-            string emailLogIn = "narutoSasuke02112021203621@gmail.com";
+            string emailLogIn = "hogwartsgryffindorslitherin@gmail.com";
             return emailLogIn;
         }
 
         public static string PasswordLogIn()
         {
-            string passwordLogIn = "Naruto_2345n";
+            string passwordLogIn = "HarryPotter-thedeath2";
             return passwordLogIn;
         }
     }
