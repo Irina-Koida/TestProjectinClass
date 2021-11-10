@@ -68,7 +68,7 @@ namespace TestProjectinClass
                 .ImputPasswordField(HelpForTests.PasswordLogIn())
                 .LogInButtonClick();
             var actualResultMessage = home.CheckATryLogIn;
-            Assert.AreEqual(expected: "Welcome back Naruto! How can we help?", actualResultMessage);
+            Assert.AreEqual(expected: "Welcome back Harry! How can we help?", actualResultMessage);
         }
 
         [Test]
