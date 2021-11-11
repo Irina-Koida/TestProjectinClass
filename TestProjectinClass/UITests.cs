@@ -27,7 +27,6 @@ namespace TestProjectinClass
         {
             var accountSetting = new AccountSettings(_webDriver);
             var signInPage = new SignUp(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             signInPage.GoToSignInPage()
                .ImputEmailField(HelpForTests.EmailLogIn())
                .ImputPasswordField(HelpForTests.PasswordLogIn())
@@ -36,7 +35,6 @@ namespace TestProjectinClass
             accountSetting.EditGeneralInfo();
             accountSetting.EditGeneralInfoIndustry("Photo");
             accountSetting.SaveGeneralInfoEdition();
-
             string actualResult = "Photo";
             Assert.AreEqual(expected: "Photo", actualResult);
         }
@@ -46,8 +44,6 @@ namespace TestProjectinClass
         {
             var accountSetting = new AccountSettings(_webDriver);
             var signInPage = new SignUp(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
-            string firstName = HelpForTests.UniqueStringGenerationName();
             signInPage.GoToSignInPage()
                .ImputEmailField(HelpForTests.EmailLogIn())
                .ImputPasswordField(HelpForTests.PasswordLogIn())
@@ -67,7 +63,6 @@ namespace TestProjectinClass
         {
             var accountSetting = new AccountSettings(_webDriver);
             var signInPage = new SignUp(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             string firstName = HelpForTests.UniqueStringGenerationName();
             signInPage.GoToSignInPage()
                .ImputEmailField(HelpForTests.EmailLogIn())
@@ -85,7 +80,6 @@ namespace TestProjectinClass
         {
             var accountSetting = new AccountSettings(_webDriver);
             var signInPage = new SignUp(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             string lastName = HelpForTests.UniqueStringGeneration();
             signInPage.GoToSignInPage()
                .ImputEmailField(HelpForTests.EmailLogIn())
@@ -103,7 +97,6 @@ namespace TestProjectinClass
         {
             var accountSetting = new AccountSettings(_webDriver);
             var signInPage = new SignUp(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             signInPage.GoToSignInPage()
                .ImputEmailField(HelpForTests.EmailLogIn())
                .ImputPasswordField(HelpForTests.PasswordLogIn())
@@ -117,6 +110,56 @@ namespace TestProjectinClass
         }
 
         [Test]
+        public void EditGeneralInfoCompanyAddressNewWayValid()
+        {
+            var accountSetting = new AccountSettings(_webDriver);
+            var signInPage = new SignUp(_webDriver);
+            signInPage.GoToSignInPage()
+               .ImputEmailField(HelpForTests.EmailLogIn())
+               .ImputPasswordField(HelpForTests.PasswordLogIn())
+               .LogInButtonClick();
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoCompanyAddress("Salem, MA, USA");
+            accountSetting.SaveGeneralInfoEdition();
+            string actualResult = "Salem, MA, USA";
+            accountSetting.GoToGreetingHomeHage();
+            var homePage2 = new GreetingHomePage(_webDriver);
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoCompanyAddress("Queens, NY, USA");
+            accountSetting.SaveGeneralInfoEdition();
+            string actualResult2 = "Queens, NY, USA";
+            Assert.AreEqual(expected: "Salem, MA, USA", actual: actualResult);
+            Assert.AreEqual(expected: "Queens, NY, USA", actual: actualResult2);
+        }
+
+        [Test]
+        public void EditGeneralInfoChangeIndustryNewWayValid()
+        {
+            var accountSetting = new AccountSettings(_webDriver);
+            var signInPage = new SignUp(_webDriver);
+            signInPage.GoToSignInPage()
+               .ImputEmailField(HelpForTests.EmailLogIn())
+               .ImputPasswordField(HelpForTests.PasswordLogIn())
+               .LogInButtonClick();
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoIndustry("Photo");
+            accountSetting.SaveGeneralInfoEdition();
+            string actualResult = "Photo";
+            accountSetting.GoToGreetingHomeHage();
+            var homePage2 = new GreetingHomePage(_webDriver);
+            accountSetting.ClickAccountButton();
+            accountSetting.EditGeneralInfo();
+            accountSetting.EditGeneralInfoIndustry("Film");
+            accountSetting.SaveGeneralInfoEdition();
+            string actualResult2 = "Film";
+            Assert.AreEqual(expected: "Photo", actual: actualResult);
+            Assert.AreEqual(expected: "Film", actual: actualResult2);
+        }
+
+        [Test]
         public void LogOutAccount()
         {
             var logOutPage = new LogAut(_webDriver);
@@ -127,44 +170,43 @@ namespace TestProjectinClass
                 .LogInButtonClick();
             logOutPage.ClickAccountButton();
             logOutPage.ClickLogAutButton();
-
-            Assert.AreEqual(expected: signIn.GoToSignInPage() , signIn.GoToSignInPage());
+            Assert.AreEqual(expected: signIn.GoToSignInPage(), signIn.GoToSignInPage());
         }
 
-        [TestCase("")]
-        public void LoginWithEmptyEmail(string imputEmail)
+        [Test]
+        public void LoginWithEmptyEmail()
         {
             var signInPage = new SignUp(_webDriver);
             signInPage.GoToSignInPage()
-                .ImputEmailField(imputEmail)
+                .ImputEmailField("")
                 .ImputPasswordField(HelpForTests.PasswordLogIn())
                 .LogInButtonClick();
             var actualResultMessage = signInPage.GetErrorMessageAboutEmail();
             Assert.AreEqual(expected: "Required", actualResultMessage);
         }
 
-        [TestCase("")]
-        public void LoginWithEmptyPassword(string imputPass)
+        [Test]
+        public void LoginWithEmptyPassword()
         {
             var signInPage = new SignUp(_webDriver);
             signInPage.GoToSignInPage()
                 .ImputEmailField(HelpForTests.EmailLogIn())
-                .ImputPasswordField(imputPass)
+                .ImputPasswordField("")
                 .LogInButtonClick();
             var actualResultMessage = signInPage.GetErrorMessageAboutPassword();
             Assert.AreEqual(expected: "Required", actualResultMessage);
         }
 
-        [TestCase("", "")]
-        public void LoginWithEmptyPasswordAndEmail(string email, string password)
+        [Test]
+        public void LoginWithEmptyPasswordAndEmail()
         {
             var signInPage = new SignUp(_webDriver);
             signInPage.GoToSignInPage()
-                .ImputEmailField(email)
-                .ImputPasswordField(password)
+                .ImputEmailField("")
+                .ImputPasswordField("")
                 .LogInButtonClick();
             var actualResultMessage = signInPage.GetErrorMessageAboutPassword() + signInPage.GetErrorMessageAboutEmail();
-            Assert.AreEqual(expected: "RequiredRequired", actualResultMessage);
+            Assert.AreEqual(expected: "Required", "Required", actualResultMessage);
         }
 
         [Test]
@@ -189,7 +231,6 @@ namespace TestProjectinClass
                 .ImputPasswordField("wrongPassword123")
                 .LogInButtonClick();
             var actualResultMessage = signInPage.GetErrorMessage();
-
             Assert.AreEqual(expected: "Please enter a correct email and password.", actualResultMessage);
         }
 
@@ -206,17 +247,16 @@ namespace TestProjectinClass
                 .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
-
             registrationPage.InputCompanyName(HelpForTests.CompanyName())
                 .InputCompanyWebSite(HelpForTests.CompanySite())
                 .InputCompanyAddress(HelpForTests.CompanyAddress())
                 .InputCompanyIndustry(5)
                 .ClickOnFinishRegistration();
-
-            Assert.AreEqual(expected: $"Welcome back {HelpForTests.FirstName()}! How can we help?", homePage.CheckATryLogIn);
+            Assert.AreEqual(expected: $"Welcome {HelpForTests.FirstName()}! How can we help?", homePage.CheckATryLogIn);
         }
 
         [TestCase("name")]
+        [TestCase("nameError.com")]
         public void RegistrationWithInValidEmail(string email)
         {
             var registrationPage = new Registration(_webDriver);
@@ -230,15 +270,13 @@ namespace TestProjectinClass
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutEmail();
-
             Assert.AreEqual(expected: "Invalid Email", actualResultat);
         }
 
-        [TestCase("3344556678qe_d", "3344556678qe_d")]
+        [TestCase("3344556678qre_d", "3344556678qre_d")]
         public void RegistrationWithInValidPasswordUppercase(string password, string confirmPassword)
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputFirstName(HelpForTests.FirstName())
                 .InputLastName(HelpForTests.LastName())
@@ -248,15 +286,13 @@ namespace TestProjectinClass
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordUpperCase();
-
             Assert.AreEqual(expected: "Invalid password format At least one capital letter", actualResultat);
         }
 
-        [TestCase("2233445567QE_D", "2233445567QE_D")]
+        [TestCase("2233445567QRE_D", "2233445567QRE_D")]
         public void RegistrationWithInValidPasswordLowercase(string password, string confirmPassword)
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputFirstName(HelpForTests.FirstName())
                 .InputLastName(HelpForTests.LastName())
@@ -266,7 +302,6 @@ namespace TestProjectinClass
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordLowerCase();
-
             Assert.AreEqual(expected: "Invalid password format At least one lowercase letter", actualResultat);
         }
 
@@ -275,7 +310,6 @@ namespace TestProjectinClass
         public void RegistrationWithInValidPasswordLenght(string password, string confirmPassword)
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputFirstName(HelpForTests.FirstName())
                 .InputLastName(HelpForTests.LastName())
@@ -285,7 +319,6 @@ namespace TestProjectinClass
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordLenght();
-
             Assert.AreEqual(expected: "Invalid password format From 8 to 25 characters", actualResultat);
         }
 
@@ -293,7 +326,6 @@ namespace TestProjectinClass
         public void RegistrationWithInValidPasswordSymbol(string password, string confirmPassword)
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputFirstName(HelpForTests.FirstName())
                 .InputLastName(HelpForTests.LastName())
@@ -303,7 +335,6 @@ namespace TestProjectinClass
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordMarks();
-
             Assert.AreEqual(expected: "Invalid password format At least one special character such as an exclamation mark", actualResultat);
         }
 
@@ -311,7 +342,6 @@ namespace TestProjectinClass
         public void RegistrationWithInValidPasswordNumber(string password, string confirmPassword)
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputFirstName(HelpForTests.FirstName())
                 .InputLastName(HelpForTests.LastName())
@@ -321,7 +351,6 @@ namespace TestProjectinClass
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton(); ;
             var actualResultat = registrationPage.ErrorTextAboutPassword() + " " + registrationPage.ErrorTextAboutPasswordNumbers();
-
             Assert.AreEqual(expected: "Invalid password format At least one number", actualResultat);
         }
 
@@ -329,7 +358,6 @@ namespace TestProjectinClass
         public void RegistrationWithInValidPasswordMath(string password, string confirmPassword)
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputFirstName(HelpForTests.FirstName())
                 .InputLastName(HelpForTests.LastName())
@@ -339,7 +367,6 @@ namespace TestProjectinClass
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutPasswordMatch();
-
             Assert.AreEqual(expected: "Passwords match", actualResultat);
         }
 
@@ -357,17 +384,15 @@ namespace TestProjectinClass
                 .InputPhoneNumber(phone)
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutPhone();
-
             Assert.AreEqual(expected: "Invalid phone format", actualResultat);
         }
 
-        [TestCase("")]
-        public void RegistrationWithEmptyFirstName(string firstName)
+        [Test]
+        public void RegistrationWithEmptyFirstName()
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
-                .InputFirstName(firstName)
+                .InputFirstName("")
                 .InputLastName(HelpForTests.LastName())
                 .InputEmail(HelpForTests.EmailUser())
                 .InputPassword(HelpForTests.RegistrationPassword())
@@ -375,83 +400,74 @@ namespace TestProjectinClass
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutFirstName();
-
             Assert.AreEqual(expected: "Required", actualResultat);
         }
 
-        [TestCase("")]
-        public void RegistrationWithEmptyLastName(string lastEmptyName)
+        [Test]
+        public void RegistrationWithEmptyLastName()
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
-                .InputLastName(HelpForTests.FirstName())
-                .InputLastName(lastEmptyName)
+                .InputFirstName(HelpForTests.FirstName())
+                .InputLastName("")
                 .InputEmail(HelpForTests.EmailUser())
                 .InputPassword(HelpForTests.RegistrationPassword())
                 .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                 .InputPhoneNumber(HelpForTests.PhoneNumber())
                 .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutLastName();
-
             Assert.AreEqual(expected: "Required", actualResultat);
         }
 
-        [TestCase("")]
-        public void RegistrationWithEmptyMail(string emptyEmail)
+        [Test]
+        public void RegistrationWithEmptyMail()
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                .InputFirstName(HelpForTests.FirstName())
                .InputLastName(HelpForTests.LastName())
-               .InputEmail(emptyEmail)
+               .InputEmail("")
                .InputPassword(HelpForTests.RegistrationPassword())
                .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
                .InputPhoneNumber(HelpForTests.PhoneNumber())
                .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutEmail();
-
             Assert.AreEqual(expected: "Required", actualResultat);
         }
 
-        [TestCase("")]
-        public void RegistrationWithEmptyPasword(string password)
+        [Test]
+        public void RegistrationWithEmptyPasword()
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                 .InputFirstName(HelpForTests.FirstName())
                .InputLastName(HelpForTests.LastName())
                .InputEmail(HelpForTests.EmailUser())
-               .InputPassword(password)
+               .InputPassword("")
                .InputPhoneNumber(HelpForTests.PhoneNumber())
                .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutPassword();
-
             Assert.AreEqual(expected: "Invalid password format", actualResultat);
         }
 
-        [TestCase("")]
-        public void RegistrationWithEmptyConfirmPassword(string confirmPassword)
+        [Test]
+        public void RegistrationWithEmptyConfirmPassword()
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
                .InputFirstName(HelpForTests.FirstName())
                .InputLastName(HelpForTests.LastName())
                .InputEmail(HelpForTests.EmailUser())
                .InputPassword(HelpForTests.RegistrationPassword())
-               .InputConfirmPassword(confirmPassword)
+               .InputConfirmPassword("")
                .InputPhoneNumber(HelpForTests.PhoneNumber())
                .ClickNextButton(); 
             var actualResultat = registrationPage.ErrorTextAboutConfitmPassword();
-
             Assert.AreEqual(expected: "Passwords must match", actualResultat);
         }
 
-        [TestCase("")]
-        public void RegistrationWithEmptyPhone(string phone)
+        [Test]
+        public void RegistrationWithEmptyPhone()
         {
             var registrationPage = new Registration(_webDriver);
             var homePage = new GreetingHomePage(_webDriver);
@@ -461,15 +477,14 @@ namespace TestProjectinClass
                .InputEmail(HelpForTests.EmailUser())
                .InputPassword(HelpForTests.RegistrationPassword())
                .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
-               .InputPhoneNumber(phone)
+               .InputPhoneNumber("")
                .ClickNextButton();
             var actualResultat = registrationPage.ErrorTextAboutPhone();
-
             Assert.AreEqual(expected: "Invalid phone format", actualResultat);
         }
 
-        [TestCase("", 1)]
-        public void RegistrationWitfInEmptyCompanyName(string companyName, int count)
+        [Test]
+        public void RegistrationWitfInEmptyCompanyName()
         {
             var registrationPage = new Registration(_webDriver);
             var home = new GreetingHomePage(_webDriver);
@@ -481,19 +496,17 @@ namespace TestProjectinClass
             .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
             .InputPhoneNumber(HelpForTests.PhoneNumber())
             .ClickNextButton();
-
-            registrationPage.InputCompanyName(companyName)
+            registrationPage.InputCompanyName("")
             .InputCompanyWebSite(HelpForTests.CompanySite())
             .InputCompanyAddress(HelpForTests.CompanyAddress())
-            .InputCompanyIndustry(count)
+            .InputCompanyIndustry(1)
             .ClickOnFinishRegistration();
             var actualResultat = registrationPage.ErrorTextAboutCompanyName();
-
             Assert.AreEqual(expected: "Required", actualResultat);
         }
 
-        [TestCase( "", 2)]
-        public void RegistrationWitfInEmptyCompanyWebSite(string companyWebSite, int count)
+        [Test]
+        public void RegistrationWitfInEmptyCompanyWebSite()
         {
             var registrationPage = new Registration(_webDriver);
             var homePage = new GreetingHomePage(_webDriver);
@@ -505,44 +518,17 @@ namespace TestProjectinClass
             .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
             .InputPhoneNumber(HelpForTests.PhoneNumber())
             .ClickNextButton();
-
              registrationPage.InputCompanyName(HelpForTests.CompanyName())
-            .InputCompanyWebSite(companyWebSite)
+            .InputCompanyWebSite("")
             .InputCompanyAddress(HelpForTests.CompanyAddress())
-            .InputCompanyIndustry(count)
+            .InputCompanyIndustry(2)
             .ClickOnFinishRegistration();
             var actualResultat = registrationPage.ErrorTextAboutCompanyWebSite();
-
             Assert.AreEqual(expected: "Required", actualResultat);
         }
 
-        [TestCase("",2)]
-        public void RegistrationWitfInEmptyAddress(string companyEmptyAddress, int count)
-        {
-            var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
-            registrationPage.GoToRegistrationPages()
-              .InputFirstName(HelpForTests.FirstName())
-              .InputLastName(HelpForTests.LastName())
-              .InputEmail(HelpForTests.EmailUser())
-              .InputPassword(HelpForTests.RegistrationPassword())
-              .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
-              .InputPhoneNumber(HelpForTests.PhoneNumber())
-              .ClickNextButton();
-
-            registrationPage.InputCompanyName(HelpForTests.CompanyName())
-           .InputCompanyWebSite(HelpForTests.CompanySite())
-           .InputCompanyAddress(companyEmptyAddress)
-           .InputCompanyIndustry(count)
-           .ClickOnFinishRegistration();
-            var actualResultat = registrationPage.ErrorTextAboutAddress();
-
-            Assert.AreEqual(expected: "Please choose a location from the suggested addresses. This field doesn’t accept custom addresses, or “#” symbols.", actualResultat);
-        }
-
-
-        [TestCase("57675 tyfdj ## jdfjviiefjddh", 2)]
-        public void RegistrationWitfInValidAddress( string companyAddress ,int count)
+        [Test]
+        public void RegistrationWitfInEmptyAddress()
         {
             var registrationPage = new Registration(_webDriver);
             var homePage = new GreetingHomePage(_webDriver);
@@ -554,14 +540,34 @@ namespace TestProjectinClass
              .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
              .InputPhoneNumber(HelpForTests.PhoneNumber())
              .ClickNextButton();
+            registrationPage.InputCompanyName(HelpForTests.CompanyName())
+           .InputCompanyWebSite(HelpForTests.CompanySite())
+           .InputCompanyAddress("")
+           .InputCompanyIndustry(3)
+           .ClickOnFinishRegistration();
+            var actualResultat = registrationPage.ErrorTextAboutAddress();
+            Assert.AreEqual(expected: "Please choose a location from the suggested addresses. This field doesn’t accept custom addresses, or “#” symbols.", actualResultat);
+        }
 
+        [TestCase("57675 tyfdj ## jdfjviiefjddh", 1)]
+        public void RegistrationWitfInValidAddress( string companyAddress ,int count)
+        {
+            var registrationPage = new Registration(_webDriver);
+            var homePage = new GreetingHomePage(_webDriver);
+            registrationPage.GoToRegistrationPages()
+            .InputFirstName(HelpForTests.FirstName())
+            .InputLastName(HelpForTests.LastName())
+            .InputEmail(HelpForTests.EmailUser())
+            .InputPassword(HelpForTests.RegistrationPassword())
+            .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
+            .InputPhoneNumber(HelpForTests.PhoneNumber())
+            .ClickNextButton();
             registrationPage.InputCompanyName(HelpForTests.CompanyName())
            .InputCompanyWebSite(HelpForTests.CompanySite())
            .InputCompanyAddress(companyAddress)
            .InputCompanyIndustry(count)
            .ClickOnFinishRegistration();
             var actualResultat = registrationPage.ErrorTextAboutAddress();
-
             Assert.AreEqual(expected: "Please choose a location from the suggested addresses. This field doesn’t accept custom addresses, or “#” symbols.", actualResultat);
         }
 

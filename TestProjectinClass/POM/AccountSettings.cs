@@ -16,7 +16,8 @@ namespace TestProjectinClass.POM
         private readonly By _passwordType = By.CssSelector("input[type=password]");
 
         private readonly By _infoEditGeneral = By.CssSelector("[class='ng-untouched ng-pristine ng-valid'] [class='edit-switcher__icon_type_edit']");
-      
+        private readonly By _editIndustry = By.XPath("//common-border/div[1]/div/nb-account-info-general-information/form/div[2]/div/nb-paragraph[4]");
+
         private readonly By _editGeneralInfoEmail = By.CssSelector("nb-account-info-email-address [class='edit-switcher__icon_type_edit']");
         private readonly By _editGeneralInfoPassword = By.CssSelector("nb-account-info-password [class='edit-switcher__icon_type_edit']");
         private readonly By _editGeneralInfoPhone = By.CssSelector("nb-account-info-phone [class='edit-switcher__icon_type_edit']");
@@ -81,15 +82,29 @@ namespace TestProjectinClass.POM
             return this;
         }
 
+        public string EditIndustry()
+        {
+            return _webDriver.FindElement(_editIndustry).Text;
+        }
+
         public AccountSettings EditGeneralInfoCompanyAddress(string address)
         {
+            _webDriver.FindElement(_editGeneralInfoLocation).Click();
+            _webDriver.FindElement(_editGeneralInfoLocation).SendKeys(Keys.Control + "a");
+            _webDriver.FindElement(_editGeneralInfoLocation).SendKeys(Keys.Delete);
             _webDriver.FindElement(_editGeneralInfoLocation).Clear();
+            Thread.Sleep(1500);
             _webDriver.FindElement(_editGeneralInfoLocation).SendKeys(address);
             Thread.Sleep(1500);
             _webDriver.FindElement(_editGeneralInfoLocation).SendKeys(Keys.ArrowDown);
             Thread.Sleep(500);
             _webDriver.FindElement(_editGeneralInfoLocation).SendKeys(Keys.Enter);
             return this;
+        }
+
+        public string EditInfoLocation()
+        {
+            return _webDriver.FindElement(_editGeneralInfoLocation).Text;
         }
 
         public AccountSettings EditGeneralInfoEmail()
