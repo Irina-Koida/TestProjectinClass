@@ -509,7 +509,6 @@ namespace TestProjectinClass
         public void RegistrationWitfInEmptyCompanyWebSite()
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
              registrationPage.GoToRegistrationPages()
             .InputFirstName(HelpForTests.FirstName())
             .InputLastName(HelpForTests.LastName())
@@ -531,7 +530,6 @@ namespace TestProjectinClass
         public void RegistrationWitfInEmptyAddress()
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
              .InputFirstName(HelpForTests.FirstName())
              .InputLastName(HelpForTests.LastName())
@@ -553,7 +551,6 @@ namespace TestProjectinClass
         public void RegistrationWitfInValidAddress( string companyAddress ,int count)
         {
             var registrationPage = new Registration(_webDriver);
-            var homePage = new GreetingHomePage(_webDriver);
             registrationPage.GoToRegistrationPages()
             .InputFirstName(HelpForTests.FirstName())
             .InputLastName(HelpForTests.LastName())
@@ -569,6 +566,24 @@ namespace TestProjectinClass
            .ClickOnFinishRegistration();
             var actualResultat = registrationPage.ErrorTextAboutAddress();
             Assert.AreEqual(expected: "Please choose a location from the suggested addresses. This field doesn’t accept custom addresses, or “#” symbols.", actualResultat);
+        }
+
+        [Test]
+        public void RegistrationWithOutRegistrationCompany()
+        {
+            var registrationPage = new Registration(_webDriver);
+            registrationPage.GoToRegistrationPages()
+           .InputFirstName(HelpForTests.FirstName())
+           .InputLastName(HelpForTests.LastName())
+           .InputEmail(HelpForTests.EmailUser())
+           .InputPassword(HelpForTests.RegistrationPassword())
+           .InputConfirmPassword(HelpForTests.RegistrationConfirmPassword())
+           .InputPhoneNumber(HelpForTests.PhoneNumber())
+           .ClickNextButton();
+           registrationPage.ClickOnFinishRegistration();
+           var homePage = new GreetingHomePage(_webDriver);
+           string actualResult = homePage.CheckATryLogIn;
+           Assert.AreEqual(expected: homePage.CheckATryLogIn, actualResult);
         }
 
         //[TearDown]
