@@ -44,6 +44,7 @@ namespace TestProjectinClass.POM
             "/div[@class = 'FormErrorText__error---nzyq']");
         private readonly By _errorMessageByAddress = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='location']/.." +
             "/div[@class = 'FormErrorText__error---nzyq']");
+
         //поменять
         private readonly By _errorMessageByPasswordLenght = By.XPath(".//*[text()='From 8 to 25 characters']/..");
         private readonly By _errorMessageByPasswordNumbers = By.XPath(".//*[text()='At least one number']/..");
@@ -51,8 +52,6 @@ namespace TestProjectinClass.POM
         private readonly By _errorMessageByPasswordLowCaseLetter = By.XPath(".//*[text()='At least one lowercase letter']/..");
         private readonly By _errorMessageByPasswordMarks = By.XPath(".//*[text()='At least one special character such as an exclamation mark']/..");
         private readonly By _errorMessageByPasswordPasswordMath = By.XPath(".//*[text()='Passwords match']/..");
-
-
 
         public Registration(IWebDriver webDriver)
         {
