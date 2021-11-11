@@ -46,6 +46,7 @@ namespace TestProjectinClass.POM
             "/div[@class = 'FormErrorText__error---nzyq']");
         private readonly By _errorMessageByIndustry = By.XPath("//div[@class='SignupFormLayout__fieldRow--bGt25']//input[@name='industry']/../.." +
             "/div[@class = 'FormErrorText__error---nzyq']");
+        //поменять
         private readonly By _errorMessageByPasswordLenght = By.XPath(".//*[text()='From 8 to 25 characters']/..");
         private readonly By _errorMessageByPasswordNumbers = By.XPath(".//*[text()='At least one number']/..");
         private readonly By _errorMessageByPasswordUpperCaseLenght = By.XPath(".//*[text()='At least one capital letter']/..");
